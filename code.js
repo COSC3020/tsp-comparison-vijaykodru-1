@@ -123,3 +123,63 @@ function generateRandomRoute(n) {
     }
     return route;
 }
+
+//random matrix generator for testing
+timerFunction()
+
+function randomGenerator(n) {
+    return Array.from({ length: n }, (_, i) => 
+        Array.from({ length: n }, (_, j) => {
+            if (i === j) {
+                return 0;
+            } else if (i === j - 1) {
+                return 1;
+            } else {
+                let value = Math.floor(Math.random() * n);
+                return value <= 0 ? 1 : value;
+            }
+        })
+    );
+}
+
+
+function timerFunction(){
+    var difference1 = 0
+    var difference2 = 0
+    var n = 1
+    var result1 = 0
+    var result2 = 0
+    var graph = []
+    
+    // Print table header before the loop starts
+    console.log("| Matrix Size | Held Karp Time (s) | Held Karp Distance | Local Search Time (s) | Local Search Distance |")
+    console.log("|-------------|--------------------|--------------------|-----------------------|-----------------------|")
+    
+    // Increase the limit size for larger matrices
+    while (n <= 25) {
+        graph = randomGenerator(n)
+        
+        // Start the timer for Held-Karp
+        var start1 = Date.now()
+        result1 = tsp_hk(graph)
+        var end1 = Date.now()
+        
+        // Start the timer for Local Search
+        var start2 = Date.now()
+        result2 = tsp_ls(graph)
+        var end2 = Date.now()
+        
+        // Calculate time differences in milliseconds
+        difference1 = end1 - start1
+        difference2 = end2 - start2
+
+        n = n + 1
+        
+        // Print the results in table format for each matrix size
+        console.log("| " + (n - 1).toString().padEnd(12) + 
+                    "| " + (difference1 / 1000).toFixed(3).padEnd(20) + 
+                    "| " + result1.toString().padEnd(20) + 
+                    "| " + (difference2 / 1000).toFixed(3).padEnd(23) + 
+                    "| " + result2.toString().padEnd(23) + "|")
+    }
+}
