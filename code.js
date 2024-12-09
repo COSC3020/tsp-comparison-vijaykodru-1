@@ -65,7 +65,7 @@ function tsp_ls(distance_matrix) {
     let currentLength = calculateRouteLength(currentRoute, distance_matrix);
     let bestLength = currentLength;
 
-    const maxIterations = n * n;  // Limit iterations to prevent excessive runtime
+    const maxIterations = n * n * 1000;  // Limit iterations to prevent excessive runtime
     let iterations = 0;
     
     // Stopping criterion: no improvement for a set number of iterations
@@ -184,7 +184,7 @@ function timerFunctionLocalSearch() {
     console.log("| Matrix Size | Local Search Time (s) | Local Search Distance |");
     console.log("|-------------|-----------------------|-----------------------|");
 
-    while (n <= 10000) {
+    while (n <= 1000) {
         const graph = randomGenerator(n);
 
         // Start timer for Local Search
@@ -202,6 +202,6 @@ function timerFunctionLocalSearch() {
             "| " + result.toString().padEnd(23) + "|"
         );
 
-        n += 100;
+        n += 50;
     }
 }
